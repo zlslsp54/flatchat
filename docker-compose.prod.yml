@@ -6,8 +6,8 @@ services:
       context: ./app
       dockerfile: Dockerfile.prod
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
     env_file:
       - ./.envfiles/.env.prod
     depends_on:
@@ -15,7 +15,7 @@ services:
   db:
     image: postgres:12.0-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - ./postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.envfiles/.env.prod.db
   nginx:
@@ -41,5 +41,3 @@ services:
       - ./nginx/data/certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
-volumes:
-  postgres_data:
