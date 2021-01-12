@@ -8,6 +8,7 @@ services:
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
     expose:
       - 8000
     env_file:
@@ -30,6 +31,7 @@ services:
       - ./nginx/data/certbot/conf:/etc/letsencrypt
       - ./nginx/data/certbot/www:/var/www/certbot
       - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
     ports:
       - "80:80"
       - "443:443"
@@ -45,3 +47,4 @@ services:
 
 volumes:
   static_volume:
+  media_volume:
