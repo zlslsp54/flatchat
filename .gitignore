@@ -1,4 +1,5 @@
 # static and media files
+static/
 staticfiles/
 mediafiles/
 
