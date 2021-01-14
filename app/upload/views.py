@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
-from .models import Upload
+from .models import Upload, UploadPrivate
 
 def image_upload(request):
     if request.method == "POST" and request.FILES["image_file"]:
