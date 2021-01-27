@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/app
     docker:
       - image: circleci/python3.8.5
     steps:
