@@ -1,0 +1,7 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python3.8.5
+    steps:
+      - run: docker-compose up -d --build
