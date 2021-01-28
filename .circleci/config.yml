@@ -1,9 +1,22 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/app
+    # working_directory: ~/app
     docker:
-      - image: circleci/python:3.8.5
+      - image: circleci/python:3.8.6
+        auth:
+          username: zlslsp54
+          password: eodgus54
     steps:
-      - run: docker-login 
-      - run: docker-compose up -d --build
+      - checkout # set working_directory by SSH default path
+      - run: echo "this is the build job"
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          # - run: docker-login 
+      - run: 
+          command: |
+            pip install -r requirements.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "env"
